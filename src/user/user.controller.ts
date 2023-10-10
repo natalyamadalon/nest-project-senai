@@ -10,7 +10,7 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post()
-  @ApiOperation({summary: 'Criar novo usuário.'})
+  @ApiOperation({summary: 'Criar novo usuário.',})
   create(@Body() createAuthDto: CreateUserDto) {
    try {
      return this.userService.create(createAuthDto);
