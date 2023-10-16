@@ -30,17 +30,30 @@ export class UserService {
     return data;
   }
 
-  async findOne(id: string) {
+  async findOne(id?: string, email?: string) {
     try {
+      // if (id) {
+      //   const data: User = await this.prismaService.user.findUnique({
+      //     where: { id },
+      //   });
+      //   delete data.password
+      //   return data;
+      // } else{
+      //   const data: User = await this.prismaService.user.findUnique({
+      //     where: { email },
+      //   });
+      //   return data;
+      // }
+
       const data: User = await this.prismaService.user.findUnique({
-        where: { id },
+        where: id ? { id } : { email }, // ternário tipo de if reduzido
       });
-
-      delete data.password; //comando para remover a senha do objeto
-
+      id ? delete data.password : null;
       return data;
+
+      // delete data.password; //comando para remover a senha do objeto
     } catch (error) {
-      return 'Id de usuário não existente !';
+      throw Error('Id de usuário não existente !');
     }
   }
 
@@ -54,7 +67,6 @@ export class UserService {
       delete data.password; //comando para remover a senha do objeto
 
       return data;
-
     } catch (error) {
       return 'Id de usuário não existente !';
     }
@@ -62,9 +74,9 @@ export class UserService {
 
   async remove(id: string) {
     try {
-      await this.prismaService.user.delete({where: {id}})
+      await this.prismaService.user.delete({ where: { id } });
     } catch (error) {
-      return "Id de usuário não existente !"
+      return 'Id de usuário não existente !';
     }
   }
 }
