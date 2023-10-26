@@ -12,4 +12,8 @@ export class SendMessageDto {
 
   @ApiProperty()
   images: string [] | undefined
+
+  @ApiProperty()
+  schedule: string | Date
+
 }

@@ -13,7 +13,7 @@ export class TelegramController {
   sendMessage(
     @Body() dtoMessage: SendMessageDto
   ) {
-    this.telegramService.sendMessageSwitch(dtoMessage);
+    this.telegramService.sendSchedule(dtoMessage);
     
   }
  
