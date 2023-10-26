@@ -1,7 +1,7 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { TelegramService } from './telegram.service';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
-import { sendMessageDto } from './dto/sendMessage.dto';
+import { SendMessageDto } from './dto/sendMessage.dto';
 
 @ApiTags('Telegram')
 @Controller('telegram')
@@ -11,14 +11,10 @@ export class TelegramController {
   @Post('send')
   @ApiOperation({ summary: 'enviar mensagem telegram' })
   sendMessage(
-    @Body() dtoMessage: sendMessageDto
+    @Body() dtoMessage: SendMessageDto
   ) {
-    this.telegramService.sendTelegrafText(dtoMessage);
+    this.telegramService.sendMessageSwitch(dtoMessage);
     
   }
-  @Post('send-media')
-  @ApiOperation ({summary: 'enviar mensagem telegram com imagem'})
-  async sendMessageMedia (@Body() dtoMessage: sendMessageDto){
-    await this.telegramService.sendTelegrafmedia(dtoMessage)
-  }
+ 
 }
