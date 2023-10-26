@@ -14,5 +14,11 @@ export class TelegramController {
     @Body() dtoMessage: sendMessageDto
   ) {
     this.telegramService.sendTelegrafText(dtoMessage);
+    
+  }
+  @Post('send-media')
+  @ApiOperation ({summary: 'enviar mensagem telegram com imagem'})
+  async sendMessageMedia (@Body() dtoMessage: sendMessageDto){
+    await this.telegramService.sendTelegrafmedia(dtoMessage)
   }
 }

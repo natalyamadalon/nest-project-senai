@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Telegraf } from 'telegraf';
 import { MediaGroup } from 'telegraf/typings/telegram-types';
+import { sendMessageDto } from './dto/sendMessage.dto';
 
 @Injectable()
 export class TelegramService {
@@ -31,10 +32,11 @@ export class TelegramService {
 
 
   async sendTelegrafmedia(
-    message: string,
-    chatid: string,
-    tokenbot: string,
-    images: string[]
+    {message,
+    chatid,
+    tokenbot,
+    images}: sendMessageDto
+
   ) {
     const bot = new Telegraf(tokenbot);
     const media: MediaGroup = images.map((image) => ({
